@@ -68,12 +68,12 @@ services:
       - 8000:8000
       - 8001:9000
     volumes:
-      - "./koku:/koku/koku:Z"
-      - "./dev/containers/unleash:/koku/.unleash:Z"
-      - "./db_functions:/koku/db_functions:Z"
-      - "./scripts:/koku/scripts:Z"
-      - "./run_server.sh:/koku/run_server.sh:Z"
-      - "./dev/credentials:/etc/credentials:Z"
+      - "./koku:/koku/koku:z"
+      - "./dev/containers/unleash:/koku/.unleash:z"
+      - "./db_functions:/koku/db_functions:z"
+      - "./scripts:/koku/scripts:z"
+      - "./run_server.sh:/koku/run_server.sh:z"
+      - "./dev/credentials:/etc/credentials:z"
     depends_on:
       - koku-base
 
@@ -137,14 +137,15 @@ services:
       - 5042:8000
       - 5001:9000
     volumes:
-      - "./koku:/koku/koku:Z"
-      - "./dev/containers/unleash:/koku/.unleash:Z"
-      - "./db_functions:/koku/db_functions:Z"
-      - "./scripts:/koku/scripts:Z"
-      - "./run_server.sh:/koku/run_server.sh:Z"
-      - "./dev/credentials:/etc/credentials:Z"
+      - "./koku:/koku/koku:z"
+      - "./dev/containers/unleash:/koku/.unleash:z"
+      - "./db_functions:/koku/db_functions:z"
+      - "./scripts:/koku/scripts:z"
+      - "./run_server.sh:/koku/run_server.sh:z"
+      - "./dev/credentials:/etc/credentials:z"
     depends_on:
       - koku-base
+      - create-parquet-bucket
 
   koku-worker:
     hostname: koku-worker-1
@@ -177,7 +178,7 @@ services:
       - PROMETHEUS_PUSHGATEWAY=${PROMETHEUS_PUSHGATEWAY-pushgateway:9091}
       - ENABLE_HCS_DEBUG=${ENABLE_HCS_DEBUG-False}
       - ENABLE_SUBS_DEBUG=${ENABLE_SUBS_DEBUG-False}
-      - ENABLE_SUBS_PROVIDER_TYPES=${ENABLE_SUBS_PROVIDER_TYPES}
+      - ENABLE_SUBS_PROVIDER_TYPES=""
       - DISABLE_ROS_MSG=${DISABLE_ROS_MSG-True}
       - S3_BUCKET_NAME=${S3_BUCKET_NAME-koku-bucket}
       - S3_ENDPOINT=${MINIO_ENDPOINT-http://koku-minio:9000}
@@ -218,26 +219,26 @@ services:
       - 6001-6020:9000
       - 5678:5678
     volumes:
-      - "./koku:/koku/koku"
-      - "./dev/containers/unleash:/koku/.unleash"
-      - "./db_functions:/koku/db_functions"
-      - "./scripts:/koku/scripts"
-      - "./testing:/testing"
-      - "./testing/local_providers/azure_local:/tmp/local_container"
-      - "./testing/local_providers/aws_local:/tmp/local_bucket"
-      - "./testing/local_providers/aws_local_0:/tmp/local_bucket_0"
-      - "./testing/local_providers/aws_local_1:/tmp/local_bucket_1"
-      - "./testing/local_providers/aws_local_2:/tmp/local_bucket_2"
-      - "./testing/local_providers/aws_local_3:/tmp/local_bucket_3"
-      - "./testing/local_providers/aws_local_4:/tmp/local_bucket_4"
-      - "./testing/local_providers/aws_local_5:/tmp/local_bucket_5"
-      - "./testing/local_providers/insights_local:/var/tmp/masu/insights_local"
-      - "./testing/local_providers/gcp_local/:/tmp/gcp_local_bucket"
-      - "./testing/local_providers/gcp_local_0/:/tmp/gcp_local_bucket_0"
-      - "./testing/local_providers/gcp_local_1/:/tmp/gcp_local_bucket_1"
-      - "./testing/local_providers/gcp_local_2/:/tmp/gcp_local_bucket_2"
-      - "./testing/local_providers/gcp_local_3/:/tmp/gcp_local_bucket_3"
-      - "./dev/credentials:/etc/credentials"
+      - "./koku:/koku/koku:z"
+      - "./dev/containers/unleash:/koku/.unleash:z"
+      - "./db_functions:/koku/db_functions:z"
+      - "./scripts:/koku/scripts:z"
+      - "./testing:/testing:z"
+      - "./testing/local_providers/azure_local:/tmp/local_container:z"
+      - "./testing/local_providers/aws_local:/tmp/local_bucket:z"
+      - "./testing/local_providers/aws_local_0:/tmp/local_bucket_0:z"
+      - "./testing/local_providers/aws_local_1:/tmp/local_bucket_1:z"
+      - "./testing/local_providers/aws_local_2:/tmp/local_bucket_2:z"
+      - "./testing/local_providers/aws_local_3:/tmp/local_bucket_3:z"
+      - "./testing/local_providers/aws_local_4:/tmp/local_bucket_4:z"
+      - "./testing/local_providers/aws_local_5:/tmp/local_bucket_5:z"
+      - "./testing/local_providers/insights_local:/var/tmp/masu/insights_local:z"
+      - "./testing/local_providers/gcp_local/:/tmp/gcp_local_bucket:z"
+      - "./testing/local_providers/gcp_local_0/:/tmp/gcp_local_bucket_0:z"
+      - "./testing/local_providers/gcp_local_1/:/tmp/gcp_local_bucket_1:z"
+      - "./testing/local_providers/gcp_local_2/:/tmp/gcp_local_bucket_2:z"
+      - "./testing/local_providers/gcp_local_3/:/tmp/gcp_local_bucket_3:z"
+      - "./dev/credentials:/etc/credentials:z"
     depends_on:
       - koku-base
 
@@ -295,10 +296,10 @@ services:
     ports:
       - 7001-7020:9000
     volumes:
-      - "./koku:/koku/koku:Z"
-      - "./dev/containers/unleash:/koku/.unleash:Z"
-      - "./db_functions:/koku/db_functions:Z"
-      - "./scripts:/koku/scripts:Z"
+      - "./koku:/koku/koku:z"
+      - "./dev/containers/unleash:/koku/.unleash:z"
+      - "./db_functions:/koku/db_functions:z"
+      - "./scripts:/koku/scripts:z"
     depends_on:
       - koku-base
 
@@ -338,7 +339,7 @@ services:
       - KOKU_API_PORT=${KOKU_API_PORT-8000}
       - KOKU_API_PATH_PREFIX=${KOKU_API_PATH_PREFIX-/api/cost-management/v1}
       - ENABLE_SUBS_DEBUG=${ENABLE_SUBS_DEBUG-False}
-      - ENABLE_SUBS_PROVIDER_TYPES=${ENABLE_SUBS_PROVIDER_TYPES}
+      - ENABLE_SUBS_PROVIDER_TYPES=""
       - S3_BUCKET_NAME=${S3_BUCKET_NAME-koku-bucket}
       - S3_ENDPOINT=${MINIO_ENDPOINT-http://koku-minio:9000}
       - S3_ACCESS_KEY
@@ -495,7 +496,7 @@ services:
     ports:
       - ${POSTGRES_SQL_SERVICE_PORT-15432}:5432
     volumes:
-      - ./dev/containers/postgresql/data:/var/lib/${DATABASE_DATA_DIR-postgresql}/data:Z
+      - ./dev/containers/postgresql/data:/var/lib/${DATABASE_DATA_DIR-postgresql}/data:z
     command:
       # This command give more precise control over the parameter settings
       # Included are loading the pg_stat_statements lib
@@ -617,7 +618,7 @@ services:
     ports:
       - 4242:4242
     volumes:
-      - "./dev/containers/unleash:/.unleash:Z"
+      - "./dev/containers/unleash:/.unleash:z"
     depends_on:
       db:
         condition: service_healthy
@@ -637,7 +638,7 @@ services:
       - 9090:9090
     command: server /home/kminio/data --console-address ":9090"
     volumes:
-      - ./dev/containers/minio:/home/kminio/data:Z
+      - ./dev/containers/minio:/home/kminio/data:z
 
   create-parquet-bucket:
     image: minio/mc:latest
@@ -664,7 +665,7 @@ services:
     ports:
       - 9083:8000
     environment:
-      - HIVE_LOGLEVEL=INFO
+      - HIVE_LOGLEVEL=DEBUG
       - S3_ENDPOINT=${MINIO_ENDPOINT-http://koku-minio:9000}
       - S3_ACCESS_KEY=${S3_ACCESS_KEY-kokuminioaccess}
       - S3_SECRET=${S3_SECRET-kokuminiosecret}
@@ -676,7 +677,7 @@ services:
       - DATABASE_USER=${DATABASE_USER-hive}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD-hive}
     volumes:
-      - ./dev/containers/hive-metastore/metastore-site.xml:/opt/hive-metastore-bin/conf/metastore-site.xml
+      - ./dev/containers/hive-metastore/metastore-site.xml:/opt/hive-metastore-bin/conf/metastore-site.xml:z
     depends_on:
       - db
       - minio
@@ -707,14 +708,14 @@ services:
       - DATABASE_USER=${DATABASE_USER-postgres}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD-postgres}
     volumes:
-      - ./dev/containers/trino/etc/config.properties:/etc/trino/config.properties
-      - ./dev/containers/trino/etc/jvm.config:/etc/trino/jvm.config
-      - ./dev/containers/trino/etc/log.properties:/etc/trino/log.properties
-      - ./dev/containers/trino/etc/catalog/hive.properties:/etc/trino/catalog/${HIVE_PROPERTIES_FILE-hive.properties}
-      - ./dev/containers/trino/etc/catalog/glue.properties:/etc/trino/catalog/${GLUE_PROPERTIES_FILE-glue.properties}
-      - ./dev/containers/trino/etc/catalog/postgres.properties:/etc/trino/catalog/postgres.properties
-      - ./dev/containers/trino/data:/data/trino/data
-      - ./dev/containers/trino/logs:/data/trino/logs
+      - "./dev/containers/trino/etc/config.properties:/etc/trino/config.properties:z"
+      - "./dev/containers/trino/etc/jvm.config:/etc/trino/jvm.config:z"
+      - "./dev/containers/trino/etc/log.properties:/etc/trino/log.properties:z"
+      - "./dev/containers/trino/etc/catalog/hive.properties:/etc/trino/catalog/${HIVE_PROPERTIES_FILE-hive.properties}:z"
+      - "./dev/containers/trino/etc/catalog/glue.properties:/etc/trino/catalog/${GLUE_PROPERTIES_FILE-glue.properties}:z"
+      - "./dev/containers/trino/etc/catalog/postgres.properties:/etc/trino/catalog/postgres.properties:z"
+      - "./dev/containers/trino/data:/data/trino/data:z"
+      - "./dev/containers/trino/logs:/data/trino/logs:z"
     links:
       - hive-metastore
     depends_on:
